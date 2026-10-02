@@ -1,0 +1,105 @@
+1. Klass Customer
+Eesmärk:
+Customer klass kirjeldab klienti, kellele arve väljastatakse. Klient võib olla seotud mitme arvega.
+
+Omadus	Tüüp	Pikkus	Kohustuslik	Unikaalne	Kirjeldus
+Id	int	–	Jah	Jah	Kliendi unikaalne identifikaator
+Name	string	100	Jah	Ei	Kliendi nimi
+Address	string	255	Jah	Ei	Kliendi aadress
+Email	string	100	Jah	Ei	Kliendi e-posti aadress
+Phone	string	15	Ei	Ei	Kliendi telefoninumber
+Discount	decimal	–	Jah	Ei	Kliendile rakendatav allahindlus
+
+Customer ärireeglid
+Discount väärtus peab olema vahemikus 0 kuni 0,9.
+
+Phone peab algama märgiga + ning sisaldama suunakoodi.
+
+Id peab olema unikaalne.
+
+2. Klass Invoice
+Eesmärk:
+Invoice klass kirjeldab kliendile väljastatud arvet. Üks klient võib omada mitut arvet ning iga arve kuulub ühele kliendile.
+
+Omadus	Tüüp	Pikkus	Kohustuslik	Unikaalne	Kirjeldus
+Id	int	–	Jah	Jah	Arve unikaalne identifikaator
+Invoice No	string	15	Jah	Jah	Arve number
+Invoice Date	DateTime	–	Jah	Ei	Arve väljastamise kuupäev ja kellaaeg
+Due Date	DateTime	–	Jah	Ei	Arve maksetähtaeg
+Subtotal	decimal	–	Jah	Ei	Arve summa enne saatmiskulu ja muid lisasid
+Shipping	decimal	–	Jah	Ei	Saatmiskulu
+GrandTotal	decimal	–	Jah	Ei	Arve lõplik kogusumma
+
+Invoice ärireeglid
+Invoice No peab olema ühe võrra suurem kui eelmisel arvel.
+
+Invoice No peab olema unikaalne.
+
+Invoice Date ei tohi olla minevikus.
+
+Invoice Date ei tohi olla suurem kui Due Date.
+
+Due Date ei tohi olla minevikus.
+
+Due Date ei tohi olla väiksem kui Invoice Date.
+
+Märkus: lähteülesandes on reegel allahindluse kohta nii Customeri kui ka Invoice'i juures. Tabelis Invoice klassil aga Discount atribuuti ei ole. Kui Discount peab olema ka Invoice klassi atribuut, tuleks see lisada mudelisse.
+
+3. Klass InvoiceLine
+Eesmärk:
+InvoiceLine kirjeldab ühte rida arvel. Ühel arvel võib olla mitu arverida.
+
+Omadus	Tüüp	Pikkus	Kohustuslik	Unikaalne	Kirjeldus
+Id	int	–	Jah	Jah	Arverea unikaalne identifikaator
+Line item	string	255	Jah	Ei	Arvel oleva kauba või teenuse kirjeldus
+Unit price	decimal	–	Jah	Ei	Ühe ühiku hind
+Quantity	decimal	–	Jah	Ei	Kogus
+VatRate	decimal	–	Jah	Ei	Käibemaksumäär
+Total	decimal	–	Jah	Ei	Arverea kogusumma
+
+InvoiceLine ärireeglid
+Id peab olema unikaalne.
+
+Total arvutatakse arverea andmete põhjal.
+
+Quantity määrab müüdud või arveldatud koguse.
+
+Unit price määrab ühe ühiku hinna.
+
+VatRate määrab arverea käibemaksumäära.
+
+Klassidevahelised seosed
+Klasside vahelised seosed võiks dokumenteerida järgmiselt:
+
+Seos	Kardinaalsus	Kirjeldus
+Customer — Invoice	1 : 0..*	Ühel kliendil võib olla mitu arvet, kuid iga arve kuulub ühele kliendile
+Invoice — InvoiceLine	1 : 1..*	Ühel arvel on üks või mitu arverida ning iga arverida kuulub ühele arvele
+
+Seega on mudeli põhiline struktuur:
+
+Customer → Invoice → InvoiceLine
+
+Näiteks:
+
+Customer
+   │
+   │ 1
+   │
+   └──────── 0..*
+              Invoice
+                 │
+                 │ 1
+                 │
+                 └──────── 1..*
+                            InvoiceLine
+
+Kokkuvõte
+Mudelis on kolm põhiklassi:
+
+Customer – säilitab kliendi andmed ja kliendi allahindluse.
+
+Invoice – säilitab arve andmed, kuupäevad ja summad ning on seotud kliendiga.
+
+InvoiceLine – säilitab arve üksikute ridade andmed ning on seotud konkreetse arvega.
+
+Oluline modelleerimisdetail on see, et Customer ja Invoice vaheline seos ning Invoice ja InvoiceLine vaheline seos peaksid klassiskeemil kindlasti olema näidatud koos kardinaalsustega.

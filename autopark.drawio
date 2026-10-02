@@ -1,0 +1,63 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Autopargi opereerimine">
+    <mxGraphModel dx="1200" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Auto -->
+        <mxCell id="auto" value="&lt;b&gt;Auto&lt;/b&gt;&lt;hr&gt;tootja : String&lt;br&gt;mudel : String&lt;br&gt;numbrimark : String" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="100" y="180" width="220" height="130" as="geometry"/>
+        </mxCell>
+
+        <!-- Operatsioon -->
+        <mxCell id="operation" value="&lt;b&gt;Operatsioon&lt;/b&gt;&lt;hr&gt;kuupaev : Date&lt;br&gt;staatus : Staatus&lt;br&gt;maksumus : Decimal [0..1]" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="470" y="180" width="240" height="150" as="geometry"/>
+        </mxCell>
+
+        <!-- Töötaja -->
+        <mxCell id="employee" value="&lt;b&gt;Töötaja&lt;/b&gt;&lt;hr&gt;nimi : String" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="860" y="180" width="220" height="110" as="geometry"/>
+        </mxCell>
+
+        <!-- Staatus enum -->
+        <mxCell id="status" value="&lt;&lt;enumeration&gt;&gt;&lt;br&gt;&lt;b&gt;Staatus&lt;/b&gt;&lt;hr&gt;OOTEL&lt;br&gt;TEGEMISEL&lt;br&gt;VALMIS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="480" y="450" width="220" height="140" as="geometry"/>
+        </mxCell>
+
+        <!-- Auto - Operatsioon -->
+        <mxCell id="edgeAutoOperation" value="0..*&#xa;seotud operatsioonid" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;" edge="1" parent="1" source="auto" target="operation">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Operatsioon - Töötaja -->
+        <mxCell id="edgeOperationEmployee" value="teostaja&#xa;0..*" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;startArrow=none;" edge="1" parent="1" source="operation" target="employee">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Operatsioon - Staatus -->
+        <mxCell id="edgeOperationStatus" value="staatus" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;dashed=1;endArrow=none;startArrow=none;" edge="1" parent="1" source="operation" target="status">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Cardinality labels -->
+        <mxCell id="autoCardinality" value="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="330" y="195" width="40" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="operationAutoCardinality" value="0..*" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="420" y="195" width="50" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="operationEmployeeCardinality" value="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="730" y="195" width="40" height="30" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="employeeOperationCardinality" value="0..*" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;" vertex="1" parent="1">
+          <mxGeometry x="810" y="195" width="50" height="30" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
